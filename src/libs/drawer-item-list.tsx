@@ -96,11 +96,11 @@ export const itemList: Item[] = [
     path: "/posts",
     icon: <PostsIcon />,
   },
-  {
-    listName: "メッセージ",
-    path: "/messages",
-    icon: <MessagesIcon />,
-  },
+  // {
+  //   listName: "メッセージ",
+  //   path: "/messages",
+  //   icon: <MessagesIcon />,
+  // },
   {
     listName: "ログイン",
     path: "/login",
