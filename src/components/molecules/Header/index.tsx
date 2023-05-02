@@ -8,7 +8,7 @@ type Props = {
 export const Header: FC<Props> = ({ icon, title }) => {
   return (
     <div className="bg-white p-4">
-      <h1 className="text-2xl">
+      <h1 className="text-2xl text-gray-500">
         <div className="flex items-center">
           {icon}
           {title}
