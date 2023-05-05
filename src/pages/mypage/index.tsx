@@ -1,13 +1,14 @@
 import { Button } from "@/components/atoms/Button";
 import { BaseLayout } from "@/components/layouts/base";
 import { Header } from "@/components/molecules/Header";
+import { useSession } from "@/hooks/useSession";
 
 import { getIcon } from "@/libs/icon";
 import { getTitle } from "@/libs/title";
 import { log } from "console";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 
-import { FC, ReactElement, useState } from "react";
+import { FC, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type MypageListItemProps = {
@@ -47,19 +48,27 @@ const Mypage = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {};
 
+  const { isSignedIn } = useSession();
+
   return (
     <>
       <BaseLayout>
         <div className="grid grid-cols-2 h-screen ">
           <div className="col-span-1 my-10 pl-4 border-l-2 border-gray-100 text-gray-500">
-            <Header title={getTitle(pathname)} icon={getIcon(pathname)} />
-            <ul>
-              <MypageListItem title="名前" />
-              <MypageListItem title="年齢" />
-              <MypageListItem title="性別" />
-              <MypageListItem title="自己紹介" />
-            </ul>
-            <Button label="プロフィールを入力" onClick={handleClick} />
+            {isSignedIn ? (
+              <>
+                <Header title={getTitle(pathname)} icon={getIcon(pathname)} />
+                <ul>
+                  <MypageListItem title="名前" />
+                  <MypageListItem title="年齢" />
+                  <MypageListItem title="性別" />
+                  <MypageListItem title="自己紹介" />
+                </ul>
+                <Button label="プロフィールを入力" onClick={handleClick} />
+              </>
+            ) : (
+              <p>ログインしてください</p>
+            )}
           </div>
           {isEdit && (
             <div className="my-10 pl-4 border-l-2 border-gray-100">

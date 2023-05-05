@@ -17,7 +17,6 @@ const Login = () => {
   const { register, handleSubmit } = useForm<Inputs>();
   const { login } = useLogin();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     login(data);
   };
 
