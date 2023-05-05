@@ -39,6 +39,7 @@ type Inputs = {
 };
 
 const Mypage = () => {
+  const { isSignedIn } = useSession();
   const { pathname } = useRouter();
   const [isEdit, setIsEdit] = useState(false);
   const { register, handleSubmit } = useForm<Inputs>();
@@ -48,22 +49,22 @@ const Mypage = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {};
 
-  const { isSignedIn } = useSession();
-
   return (
     <>
       <BaseLayout>
         <div className="grid grid-cols-2 h-screen ">
           <div className="col-span-1 my-10 pl-4 border-l-2 border-gray-100 text-gray-500">
+            <Header title={getTitle(pathname)} icon={getIcon(pathname)} />
             {isSignedIn ? (
               <>
-                <Header title={getTitle(pathname)} icon={getIcon(pathname)} />
-                <ul>
-                  <MypageListItem title="名前" />
-                  <MypageListItem title="年齢" />
-                  <MypageListItem title="性別" />
-                  <MypageListItem title="自己紹介" />
-                </ul>
+                <div>
+                  <ul>
+                    <MypageListItem title="名前" />
+                    <MypageListItem title="年齢" />
+                    <MypageListItem title="性別" />
+                    <MypageListItem title="自己紹介" />
+                  </ul>
+                </div>
                 <Button label="プロフィールを入力" onClick={handleClick} />
               </>
             ) : (
